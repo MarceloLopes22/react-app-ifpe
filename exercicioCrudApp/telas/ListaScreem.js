@@ -5,7 +5,6 @@ import axios from 'react-native-axios';
 import Avatar from 'react-native-user-avatar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ListarScreen({ navigation }) {
     
@@ -22,7 +21,7 @@ export default function ListarScreen({ navigation }) {
             });
         }
         recuperarDados();
-    },[])
+    })
 
     return(
         <View>

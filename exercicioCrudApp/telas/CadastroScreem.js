@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, ScrollView, View, Image, Button, TextInput } from 'react-native';
 import { Header } from 'react-native-elements';
-import Avatar from 'react-native-user-avatar';
 import axios from 'react-native-axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FlashMessage from "react-native-flash-message";
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 
 const Separator = () => (
   <View style={styles.separator} />
@@ -41,8 +40,8 @@ export default function Cadastro ({navigation, route}) {
     }
   },[])  
 
-  async function salvar(){
-    await axios.post('http://professornilson.com/testeservico/clientes',{
+  function salvar(){
+    axios.post('http://professornilson.com/testeservico/clientes',{
      nome:getNome,
      cpf:getCpf,
      telefone:getTelefone,  
@@ -82,8 +81,8 @@ export default function Cadastro ({navigation, route}) {
    });
 }
 
-async function alterar(){
-   await axios.put('http://professornilson.com/testeservico/clientes/'+getId,{
+function alterar(){
+   axios.put('http://professornilson.com/testeservico/clientes/'+getId,{
     nome:getNome,
     cpf:getCpf,
     telefone:getTelefone,  
@@ -128,14 +127,16 @@ async function alterar(){
 
               <Text>Digite seu CPF</Text>
               <TextInput 
-                style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 , paddingTop: 10}}
+                style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1}}
                 value={getCpf} onChangeText={valor => setCpf(valor)}/>
               
               <Text>Digite seu Telefone</Text>
               <TextInput 
-                style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 , paddingTop: 10}}
+                style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1}}
                 value={getTelefone} onChangeText={valor => setTelefone(valor)}/>
               
+              <Separator></Separator>
+
               { getId == null ? 
                 <Button title="Salvar" style={{ justifyContent: "center"}} 
                 onPress={() => salvar()} />
